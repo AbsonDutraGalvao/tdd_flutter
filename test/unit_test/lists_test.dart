@@ -20,17 +20,40 @@ void main (){
       //Adciona uma task a data de tasks
       TaskData.listTasks.add(newTask);
 
-      //Lista de Tarefas
-      List<TaskModel> listTask = TaskData.listTasks;
 
       //Verificações e validações
-      expect(listTask, contains(newTask));
-      expect(listTask[0].name, "Arrumar Cama");
-      expect(listTask[0].check,  false);
+      expect(TaskData.listTasks, contains(newTask));
+      expect(TaskData.listTasks[0].name, "Arrumar Cama");
+      expect(TaskData.listTasks[0].check,  false);
 
     });
 
+    testWidgets("Editar tarefa", (widgetTester) async {
+      //Cria uma nova instância de uma task
+      TaskModel newTask = TaskModel(
+        name: "Arrumar Cama",
+        check: false,
+      );
 
+      TaskData.listTasks[0] = TaskModel(name: TaskData.listTasks[0].name, check: true);
+
+      //Verificações e validações
+      expect(TaskData.listTasks[0].name, "Arrumar Cama");
+      expect(TaskData.listTasks[0].check,  true);
+
+    });
+
+    testWidgets("Deletar Tarefa", (widgetTester) async {
+      //Cria uma nova instância de uma task
+
+      TaskData.listTasks.removeAt(0);
+
+      //Lista de Tarefas
+
+      //Verificações e validações
+      expect(TaskData.listTasks.length, 0);
+
+    });
 
   });
 }
